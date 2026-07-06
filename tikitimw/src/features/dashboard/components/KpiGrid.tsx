@@ -9,7 +9,7 @@ import { MetricCard } from "./MetricCard";
 
 export function KpiGrid() {
   return (
-    <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+    <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
       <MetricCard
         title="Revenue"
         value="MK 3.8M"

@@ -20,37 +20,37 @@ export function MetricCard({
     <GlassCard
       className="
         group
-        p-5
+        p-6
         hover:-translate-y-1
         hover:shadow-violet-900/20
       "
     >
       <div className="flex items-start justify-between">
         <div>
-          <p className="text-xs uppercase tracking-wide text-zinc-500">
+          <p className="text-sm text-zinc-500">
             {title}
           </p>
 
-          <h2 className="mt-3 text-3xl font-bold tracking-tight">
+          <h2 className="mt-4 text-4xl font-bold tracking-tight">
             {value}
           </h2>
         </div>
 
         <div
-          className="flex h-12 w-12 items-center justify-center rounded-2xl"
+          className="flex h-14 w-14 items-center justify-center rounded-2xl"
           style={{ background: iconColor }}
         >
-          <Icon size={20} />
+          <Icon size={24} />
         </div>
       </div>
 
-      <div className="mt-6 flex items-center gap-2 text-sm">
+      <div className="mt-8 flex items-center gap-2">
         <TrendingUp
-          size={16}
+          size={18}
           className="text-emerald-400"
         />
 
-        <span className="font-medium text-emerald-400">
+        <span className="font-semibold text-emerald-400">
           {change}
         </span>
 
