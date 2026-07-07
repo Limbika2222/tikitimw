@@ -1,24 +1,44 @@
 import { z } from "zod";
 
 export const createOrganizationSchema = z.object({
-  name: z.string().min(3).max(100),
+  organization: z.object({
+    name: z.string().min(3).max(100),
 
-  slug: z
-    .string()
-    .min(3)
-    .max(50)
-    .regex(/^[a-z0-9-]+$/, {
-      message:
-        "Slug may only contain lowercase letters, numbers and hyphens.",
-    }),
+    slug: z
+      .string()
+      .min(3)
+      .max(50)
+      .regex(/^[a-z0-9-]+$/, {
+        message:
+          "Slug may only contain lowercase letters, numbers and hyphens.",
+      }),
 
-  email: z.string().email().optional(),
+    email: z.string().email().optional(),
 
-  phone: z.string().optional(),
+    phone: z.string().optional(),
 
-  country: z.string().min(2),
+    website: z.string().url().optional().or(z.literal("")),
 
-  city: z.string().min(2),
+    address: z.string().optional(),
+
+    logoUrl: z.string().optional(),
+
+    country: z.string().min(2),
+
+    city: z.string().min(2),
+  }),
+
+  admin: z.object({
+    firstName: z.string().min(2).max(50),
+
+    lastName: z.string().min(2).max(50),
+
+    email: z.string().email(),
+
+    phone: z.string().optional(),
+  }),
+
+  sendInvitation: z.boolean().default(true),
 });
 
 export type CreateOrganizationInput =

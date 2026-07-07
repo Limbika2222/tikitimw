@@ -37,6 +37,7 @@ model Role {
   organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
   users          User[]
 
+  @@unique([organizationId, type])
   @@index([organizationId])
 }
 
