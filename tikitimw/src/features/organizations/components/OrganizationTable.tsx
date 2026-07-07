@@ -4,13 +4,7 @@ import DataTable, {
   DataTableColumn,
 } from "@/components/data-display/DataTable";
 
-type Organization = {
-  id: string;
-  name: string;
-  city: string;
-  country: string;
-  status: string;
-};
+import type { Organization } from "@prisma/client";
 
 type Props = {
   organizations: Organization[];
@@ -20,6 +14,12 @@ const columns: DataTableColumn<Organization>[] = [
   {
     key: "name",
     title: "Organization",
+  },
+  {
+    key: "email",
+    title: "Email",
+    render: (organization) =>
+      organization.email ?? "-",
   },
   {
     key: "city",

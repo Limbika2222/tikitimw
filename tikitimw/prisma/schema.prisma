@@ -15,6 +15,7 @@ model Organization {
   phone     String?
   website   String?
   logoUrl   String?
+  address   String?
   country   String
   city      String
   currency  String             @default("MWK")
@@ -40,20 +41,23 @@ model Role {
 }
 
 model User {
-  id             String       @id @default(cuid())
-  organizationId String
-  roleId         String
-  firstName      String
-  lastName       String
-  email          String       @unique
-  phone          String?
-  passwordHash   String
-  status         UserStatus   @default(ACTIVE)
-  lastLogin      DateTime?
-  createdAt      DateTime     @default(now())
-  updatedAt      DateTime     @updatedAt
-  role           Role         @relation(fields: [roleId], references: [id])
-  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  id                  String       @id @default(cuid())
+  organizationId      String
+  roleId              String
+  firstName           String
+  lastName            String
+  email               String       @unique
+  phone               String?
+  passwordHash        String?
+  status              UserStatus   @default(INVITED)
+  invitationToken     String?      @unique
+  invitationExpiresAt DateTime?
+  emailVerifiedAt     DateTime?
+  lastLoginAt         DateTime?
+  createdAt           DateTime     @default(now())
+  updatedAt           DateTime     @updatedAt
+  organization        Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  role                Role         @relation(fields: [roleId], references: [id])
 
   @@index([organizationId])
   @@index([roleId])
