@@ -1,11 +1,62 @@
 generator client {
-  provider = "prisma-client"
-  output   = "../src/generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
+}
+
+model Organization {
+  id        String             @id @default(cuid())
+  name      String
+  slug      String             @unique
+  email     String?
+  phone     String?
+  website   String?
+  logoUrl   String?
+  country   String
+  city      String
+  currency  String             @default("MWK")
+  timezone  String             @default("Africa/Blantyre")
+  status    OrganizationStatus @default(ACTIVE)
+  createdAt DateTime           @default(now())
+  updatedAt DateTime           @updatedAt
+  roles     Role[]
+  users     User[]
+}
+
+model Role {
+  id             String       @id @default(cuid())
+  organizationId String
+  name           String
+  type           RoleType
+  description    String?
+  createdAt      DateTime     @default(now())
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  users          User[]
+
+  @@index([organizationId])
+}
+
+model User {
+  id             String       @id @default(cuid())
+  organizationId String
+  roleId         String
+  firstName      String
+  lastName       String
+  email          String       @unique
+  phone          String?
+  passwordHash   String
+  status         UserStatus   @default(ACTIVE)
+  lastLogin      DateTime?
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  role           Role         @relation(fields: [roleId], references: [id])
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId])
+  @@index([roleId])
 }
 
 enum OrganizationStatus {

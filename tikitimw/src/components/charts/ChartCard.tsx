@@ -12,7 +12,7 @@ export function ChartCard({
     <GlassCard
       className="
         rounded-[32px]
-        p-7
+        p-4
         h-full
       "
     >

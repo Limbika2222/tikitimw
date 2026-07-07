@@ -10,13 +10,13 @@ export function ChartHeader({
   change,
 }: ChartHeaderProps) {
   return (
-    <div className="mb-8 flex items-start justify-between">
+    <div className="mb-4 flex items-start justify-between">
       <div>
-        <p className="text-zinc-500">
+        <p className="text-xs text-zinc-500">
           {title}
         </p>
 
-        <h2 className="mt-2 text-4xl font-bold">
+        <h2 className="mt-1 text-2xl font-bold">
           {value}
         </h2>
       </div>
@@ -25,9 +25,9 @@ export function ChartHeader({
         className="
           rounded-full
           bg-emerald-500/10
-          px-4
-          py-2
-          text-sm
+          px-3
+          py-1
+          text-xs
           font-semibold
           text-emerald-400
         "
