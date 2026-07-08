@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { createOrganizationSchema } from "@/features/organizations/schemas/createOrganization.schema";
 import { organizationService } from "@/features/organizations/services/organization.service";
+import { organizationOnboardingService } from "@/features/organizations/services/organization-onboarding.service";
 
 export async function GET(request: NextRequest) {
   try {
@@ -65,10 +66,10 @@ export async function POST(request: NextRequest) {
 
     const data = createOrganizationSchema.parse(body);
 
-    const organization =
-      await organizationService.createOrganization(data);
+    const result =
+      await organizationOnboardingService.onboard(data);
 
-    return NextResponse.json(organization, {
+    return NextResponse.json(result, {
       status: 201,
     });
   } catch (error) {

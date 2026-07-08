@@ -1,4 +1,5 @@
 import bcrypt from "bcrypt";
+
 import { userRepository } from "@/repositories/user.repository";
 
 export class AuthService {
@@ -7,6 +8,12 @@ export class AuthService {
 
     if (!user) {
       throw new Error("Invalid email or password.");
+    }
+
+    if (!user.passwordHash) {
+      throw new Error(
+        "Your account has not been activated yet. Please accept your invitation."
+      );
     }
 
     const validPassword = await bcrypt.compare(
